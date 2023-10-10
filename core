@@ -81,21 +81,26 @@ install() {
 
   # files
   local tmp_file="$name.tar.gz"
+  local ext="tar.gz"
   case $os in
   ubuntu)
     tmp_file="$name.deb"
+    arch="amd64"
+    ext="deb"
     # @TODO
     platform="ubuntu20.04"
     ;;
   centos)
     tmp_file="$name.rpm"
     arch="x86_64"
+    ext="rpm"
     # @TODO
     platform="centos7.0"
     ;;
   anolisos)
     tmp_file="$name.rpm"
     arch="x86_64"
+    ext="rpm"
     # @TODO
     platform="anolisos7.0"
     ;;
@@ -116,7 +121,7 @@ install() {
   #   https://github.com/aliyun/ossfs/releases/download/v1.91.1/ossfs_1.91.1_anolisos7.0_x86_64.rpm
   #   https://github.com/aliyun/ossfs/releases/download/v1.91.1/ossfs_1.91.1_anolisos8.0_x86_64.rpm
   # generate url
-  local url="${PACKAGE_CORE_RELEASE_DOWNLOAD}/$PACKAGE_CORE_VERSION/${name}_${PACKAGE_CORE_VERSION#v}_${platform}_${arch}.tar.gz"
+  local url="${PACKAGE_CORE_RELEASE_DOWNLOAD}/$PACKAGE_CORE_VERSION/${name}_${PACKAGE_CORE_VERSION#v}_${platform}_${arch}.${ext}"
   log::debug "[$(timestamp)][package][$name][$kernel][$arch] url: $url, file: ${tmp_file}, tmp_dir: $tmp_dir"
 
   log::info "[$(timestamp)][package][$name] os: $os"
