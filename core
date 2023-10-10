@@ -160,10 +160,10 @@ install() {
   case $os in
   ubuntu)
     pm install -y gdebi-core
-    sudo gdebi $tmp_file
+    sudo gdebi -n $tmp_file
     ;;
   centos)
-    sudo yum localinstall $tmp_file
+    sudo yum localinstall -y $tmp_file
     ;;
   *)
     log::error "[$(timestamp)] unsupport os: $os ($(uname -m))"
