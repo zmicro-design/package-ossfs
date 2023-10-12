@@ -89,6 +89,19 @@ install() {
     ext="deb"
     # @TODO
     platform="ubuntu20.04"
+
+    if [ -f "/etc/os-release" ]; then
+      local os_release_version=$(cat /etc/os-release | grep VERSION_ID | awk -F '"' '{print $2}')
+      case $os_release_version in
+      22.04 | 20.04 | 18.04 | 16.04)
+        platform="ubuntu${os_release_version}"
+        ;;
+      *)
+        log::error "[$(timestamp)][package][$name] unsupport ubuntu version: ${os_release_version}"
+        return 1
+        ;;
+      esac
+    fi
     ;;
   centos)
     tmp_file="$name.rpm"
