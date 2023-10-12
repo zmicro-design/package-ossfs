@@ -109,6 +109,19 @@ install() {
     ext="rpm"
     # @TODO
     platform="centos7.0"
+
+    if [ -f "/etc/os-release" ]; then
+      local os_release_version=$(cat /etc/os-release | grep VERSION_ID | awk -F '"' '{print $2}')
+      case $os_release_version in
+      8 | 7)
+        platform="centos${os_release_version}.0"
+        ;;
+      *)
+        log::error "[$(timestamp)][package][$name] unsupport centos version: ${os_release_version}"
+        return 1
+        ;;
+      esac
+    fi
     ;;
   anolisos)
     tmp_file="$name.rpm"
