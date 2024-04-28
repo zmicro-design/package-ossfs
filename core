@@ -93,8 +93,11 @@ install() {
     if [ -f "/etc/os-release" ]; then
       local os_release_version=$(cat /etc/os-release | grep VERSION_ID | awk -F '"' '{print $2}')
       case $os_release_version in
-      24.04 | 22.04 | 20.04 | 18.04 | 16.04)
+      22.04 | 20.04 | 18.04 | 16.04)
         platform="ubuntu${os_release_version}"
+        ;;
+      24.04)
+        platform="ubuntu${22.04}"
         ;;
       *)
         log::error "[$(timestamp)][package][$name] unsupport ubuntu version: ${os_release_version}"
