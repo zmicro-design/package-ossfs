@@ -97,7 +97,7 @@ install() {
         platform="ubuntu${os_release_version}"
         ;;
       24.04)
-        platform="ubuntu${22.04}"
+        platform="ubuntu22.04"
         ;;
       *)
         log::error "[$(timestamp)][package][$name] unsupport ubuntu version: ${os_release_version}"
